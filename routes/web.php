@@ -23,6 +23,10 @@ Route::get('/api/data-from-database/{day?}', [DataController::class ,  'index'])
 Route::get('/getFirst', [NotifyController::class ,  'getFirst']);
 Route::get('/send', [NotifyController::class ,  'sendNotify']);
 Route::get('/ha', [NotifyController::class ,  'isHoliday']);
+Route::get('/notify_intro', function(){
+    $pdfPath = public_path('pdf/Attendance_System_Line_Notify.pdf');
+    return response()->file($pdfPath);
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [

@@ -16,6 +16,7 @@ const form = useForm({
         <header>
             <h2 class="text-lg font-medium text-gray-900">Line Notify Token</h2>
             <p class="mt-1 text-sm text-gray-600">Please enter your line notify token.</p>
+            <a class="mt-1 text-xs text-gray-600 underline" href="/notify_intro" target="_blank"> How to use ?</a>
         </header>
         <form @submit.prevent="form.patch(route('profile.updateNotifyToken'))" class="mt-6 space-y-6">
             <div>

@@ -28,13 +28,18 @@ class NotifyController extends Controller
 
         foreach($users as $user){
 
-            $punchIn = DB::connection('sqlsrv')
+            $punchInRecord = DB::connection('sqlsrv')
             ->table('onlinemsg')
             ->where('empno', $user->name)
             ->whereDate('recorddatetime', $day)
             ->orderBy('recorddatetime', 'asc') 
-            ->first()
-            ->recorddatetime;
+            ->first();
+
+            if(!$punchInRecord){
+                continue;
+            }
+
+            $punchIn = $punchInRecord->recorddatetime;
 
             $hour = Carbon::parse($punchIn)->hour;
             $minute = Carbon::parse($punchIn)->minute;
