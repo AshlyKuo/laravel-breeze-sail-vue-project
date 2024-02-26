@@ -22,7 +22,7 @@ Route::get('/getData', [ClockController::class ,  'index']);
 Route::get('/api/data-from-database/{day?}', [DataController::class ,  'index']);
 Route::get('/getFirst', [NotifyController::class ,  'getFirst']);
 Route::get('/send', [NotifyController::class ,  'sendNotify']);
-Route::get('/ha', [NotifyController::class ,  'isHoliday']);
+// Route::get('/ha', [NotifyController::class ,  'isHoliday']);
 Route::get('/notify_intro', function(){
     $pdfPath = public_path('pdf/Attendance_System_Line_Notify.pdf');
     return response()->file($pdfPath);
@@ -40,6 +40,14 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('is_admin')->get('/admin', function(){
+    return Inertia::render('Admin');
+});
+
+Route::get('/admin/useredit/{userId}', function($userId){
+    return Inertia::render('Admin/EditUser', ['userId' => $userId]);
+})->name('user.edit');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

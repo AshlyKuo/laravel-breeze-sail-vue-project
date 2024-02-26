@@ -49,7 +49,10 @@ services:
             retries: 3
             timeout: 5s
     mssql:
-        image: 'mcr.microsoft.com/mssql/server:latest'
+        # For not Apple Silicon:
+        # image: 'mcr.microsoft.com/mssql/server:latest'
+        # For Apple Silicon:
+        image: 'mcr.microsoft.com/azure-sql-edge:latest'
         environment:
             MSSQL_HOST: '${DB_HOST_MSSQL}'
             MSSQL_DATABASE: '${DB_DATABASE_MSSQL}'

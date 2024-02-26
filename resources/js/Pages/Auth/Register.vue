@@ -8,12 +8,13 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     name: '',
-    // email: '',
+    email: '',
     password: '',
     password_confirmation: '',
 });
 
 const submit = () => {
+    form.email = form.name + '@microjet.com.tw';
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
