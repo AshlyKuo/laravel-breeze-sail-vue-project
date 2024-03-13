@@ -79,7 +79,7 @@ class NotifyController extends Controller
         $users = DB::table('users')
         ->whereNotNull('notify_token')
         ->where('notified', 'N')
-        ->where('expected_punch_out_time', '<', now()->addHours(8)->addMinutes(25))
+        ->where('expected_punch_out_time', '<', now())
         ->select('name', 'notify_token', 'expected_punch_out_time')
         ->get();
 
@@ -96,7 +96,7 @@ class NotifyController extends Controller
 
             $notify_token = $user->notify_token;
 
-            if(Carbon::parse($timeToPunchOut)->isBefore(Carbon::now()->addHours(8)->addMinutes(25)) &&
+            if(Carbon::parse($timeToPunchOut)->isBefore(Carbon::now()) &&
             Carbon::parse($lastPunch)->isBefore(Carbon::parse($timeToPunchOut))){
                 $headers = [
                     'Content-Type: application/x-www-form-urlencoded',
@@ -104,7 +104,7 @@ class NotifyController extends Controller
                 ];
     
                 $message = [
-                    'message' => '記得打卡啊啊啊',
+                    'message' => '記得打卡啊!',
                     'stickerPackageId' => '789',
                     'stickerId' => '10886'
                 ];
@@ -130,7 +130,6 @@ class NotifyController extends Controller
 
         };
     }
-
     /**
      * 是否為上班日
      */

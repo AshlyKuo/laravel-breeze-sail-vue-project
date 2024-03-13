@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        \App\Console\Commands\ChangePasswordToUsername::class,
+    ];
+    
     /**
      * Define the application's command schedule.
      */
